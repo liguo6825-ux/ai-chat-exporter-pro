@@ -1,0 +1,85 @@
+{
+  "manifest_version": 3,
+  "name": "AI Chat Exporter Pro",
+  "version": "2.0.0",
+  "description": "AI对话导出助手 - 支持豆包、DeepSeek、ChatGPT、Kimi、元宝等平台",
+  "author": "liguo6825-ux",
+  "homepage_url": "https://github.com/liguo6825-ux/ai-chat-exporter-pro",
+  
+  "permissions": [
+    "activeTab",
+    "storage",
+    "downloads"
+  ],
+  
+  "host_permissions": [
+    "*://*.doubao.com/*",
+    "*://*.deepseek.com/*",
+    "*://*.chatgpt.com/*",
+    "*://*.openai.com/*",
+    "*://*.kimi.moonshot.cn/*",
+    "*://*.yuanbao.tencent.com/*"
+  ],
+  
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.doubao.com/*",
+        "*://*.deepseek.com/*",
+        "*://*.chatgpt.com/*",
+        "*://*.openai.com/*",
+        "*://*.kimi.moonshot.cn/*",
+        "*://*.yuanbao.tencent.com/*"
+      ],
+      "js": [
+        "src/utils/scroll.js",
+        "src/utils/image.js",
+        "src/core/extractor.js",
+        "src/core/formatter.js",
+        "src/core/exporter.js",
+        "src/platforms/base.js",
+        "src/platforms/doubao.js",
+        "src/platforms/deepseek.js",
+        "src/content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  
+  "action": {
+    "default_popup": "src/ui/popup.html",
+    "default_icon": {
+      "16": "assets/icons/icon16.png",
+      "48": "assets/icons/icon48.png",
+      "128": "assets/icons/icon128.png"
+    }
+  },
+  
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/ui/*",
+        "assets/*"
+      ],
+      "matches": [
+        "*://*.doubao.com/*",
+        "*://*.deepseek.com/*",
+        "*://*.chatgpt.com/*",
+        "*://*.openai.com/*",
+        "*://*.kimi.moonshot.cn/*",
+        "*://*.yuanbao.tencent.com/*"
+      ]
+    }
+  ],
+  
+  "background": {
+    "service_worker": "src/background.js"
+  }
+}
